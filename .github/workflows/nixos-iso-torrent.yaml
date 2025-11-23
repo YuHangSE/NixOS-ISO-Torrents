@@ -25,7 +25,8 @@ jobs:
       - name: Get NixOS current commit
         id: nixos-current
         # run: echo version-git-sha=$(gh api repos/$GITHUB_REPOSITORY/releases/latest -q .tag_name) >> $GITHUB_OUTPUT
-        run: echo version-git-sha=${curl -L -H "Accept: application/vnd.github+json" https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | jq -r .tag_name} 
+        run: |
+          echo version-git-sha=${curl -L -H "Accept: application/vnd.github+json" https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | jq -r .tag_name} >> $GITHUB_OUTPUT 
         env:
           GITHUB_TOKEN: ${{ github.token }}
           
